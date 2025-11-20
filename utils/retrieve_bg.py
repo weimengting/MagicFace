@@ -115,8 +115,8 @@ def keep_background(im, parsing_anno, stride):
     num_of_class = np.max(vis_parsing_anno)
 
     for pi in range(1, num_of_class + 1):
-        # if pi == 8  or pi == 9  or pi == 14 or pi == 17 or pi == 18:
-        #     continue
+        if pi == 8  or pi == 9  or pi == 14 or pi == 17 or pi == 18 or pi == 16 or pi == 7:
+            continue
         index = np.where(vis_parsing_anno == pi)
         vis_parsing_anno_color[index[0], index[1], :] = part_colors[pi]
 

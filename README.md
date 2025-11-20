@@ -26,7 +26,7 @@ editing works.
 ### Dependencies
 
 - Python 3.10
-- Your computer should have a graphics card with approximately **24GB** to support running this test.
+- Your computer should have a graphics card with approximately **8GB** to support running this test.
 
 ### Installation
 
