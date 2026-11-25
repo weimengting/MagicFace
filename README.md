@@ -1,9 +1,35 @@
 # MagicFace
 Official implementation of MagicFace
 
-> **MagicFace: High-Fidelity Facial Expression Editing with Action-Unit Control** [[arXiv paper](http://arxiv.org/abs/2501.02260)]<br>
+> **MagicFace: High-Fidelity Facial Expression Editing with Action-Unit Control** [[IEEE paper](https://ieeexplore.ieee.org/abstract/document/11727044)] [[arXiv paper](http://arxiv.org/abs/2501.02260)]<br>
 > Mengting Wei, Tuomas Varanka, Xingxun Jiang, Huai-Qian Khor, Guoying Zhao<br>
-> University of Oulu
+> University of Oulu<br>
+> *IEEE Transactions on Multimedia (TMM), 2026*
+
+## Updates
+
+**[2026-11-25] Bug fix in `utils/preprocess.py`.** In the previous version, when the face was close to the image boundary,
+the cropped 512 $\times$ 512 image was padded with **black borders**. Since the masked face region in the background
+condition is also black, these borders conflict with the mask and severely degrade the editing results.
+We now fill the out-of-image region by replicating the edge pixels (`borderMode=cv2.BORDER_REPLICATE` in `cv2.warpAffine`).
+If you have preprocessed your own images with the old version, please pull the latest code and re-run `preprocess.py` and `retrieve_bg.py`.
+
+<table align="center">
+  <tr>
+    <td align="center"><img src="./assets/ffhq_00002_input.jpg" width="256"></td>
+    <td align="center"><img src="./assets/ffhq_00002_crop_old.jpg" width="256"></td>
+    <td align="center"><img src="./assets/ffhq_00002_crop_new.jpg" width="256"></td>
+  </tr>
+  <tr>
+    <td align="center">Input image</td>
+    <td align="center">Old version (black borders ✗)</td>
+    <td align="center">Fixed version ✓</td>
+  </tr>
+</table>
+
+<p align="center"><sub>The example image is taken from the <a href="https://github.com/NVlabs/ffhq-dataset">FFHQ</a> dataset (image 00002).</sub></p>
+
+**[2026] MagicFace has been published in [IEEE Transactions on Multimedia (TMM)](https://ieeexplore.ieee.org/abstract/document/11727044)!** 🎉
 
 
 ## Introduction
@@ -121,6 +147,20 @@ If the issue is code-related, please open an issue here.
 
 For questions, please also consider opening an issue as it may benefit future reader. 
 Otherwise, email Mengting Wei at [mengting.wei@oulu.fi](mengting.wei@oulu.fi).
+
+### Citation
+
+If you find this work useful, please cite:
+
+```bibtex
+@article{wei2026magicface,
+  title={MagicFace: High-Fidelity Facial Expression Editing with Action-Unit Control},
+  author={Wei, Mengting and Varanka, Tuomas and Jiang, Xingxun and Khor, Huai-Qian and Zhao, Guoying},
+  journal={IEEE Transactions on Multimedia},
+  year={2026},
+  url={https://ieeexplore.ieee.org/abstract/document/11727044}
+}
+```
 
 ### Acknowledgements
 

@@ -52,7 +52,8 @@ def crop_one_image(args):
 
     warp_mat_crop_sor = datasets_faceswap.transformation_from_points(bbox_pst_sor,
                                                                      datasets_faceswap.mean_box_lm4p_512)
-    im_crop512_sor = cv2.warpAffine(np.array(im_pil_sor), warp_mat_crop_sor, (512, 512), flags=cv2.INTER_LINEAR)
+    im_crop512_sor = cv2.warpAffine(np.array(im_pil_sor), warp_mat_crop_sor, (512, 512), flags=cv2.INTER_LINEAR,
+                                    borderMode=cv2.BORDER_REPLICATE)  # avoid black borders, which conflict with the black mask
 
     im_pil_sor = Image.fromarray(im_crop512_sor)
     im_pil_sor = pil2tensor(im_pil_sor)
